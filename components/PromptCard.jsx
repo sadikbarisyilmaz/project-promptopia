@@ -2,7 +2,7 @@
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
   const { data: session } = useSession();
@@ -13,10 +13,19 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
     navigator.clipboard.writeText(post.prompt);
     setTimeout(() => setCopied(""), 3000);
   };
+  const router = useRouter();
+  const handleGoToProfile = (userId, username) => {
+    router.push(`/profile/${userId}?name=${username}`);
+  };
   return (
     <div className="prompt_card">
       <div className="flex justify-between items-start gap-5">
-        <div className="flex-1 flex justify-start itmes-center gap-3 cursor-pointer">
+        <div
+          onClick={() =>
+            handleGoToProfile(post.creator._id, post.creator.username)
+          }
+          className="flex-1 flex justify-start itmes-center gap-3 cursor-pointer"
+        >
           <Image
             src={post.creator.image}
             alt="user_image"
