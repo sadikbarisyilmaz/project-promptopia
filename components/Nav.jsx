@@ -88,7 +88,7 @@ const Nav = () => {
                   My Profile
                 </Link>
                 <Link
-                  href="/create-profile"
+                  href="/create-prompt"
                   className="dopdown_link"
                   onClick={() => setToggleDropdown(false)}
                 >
@@ -116,7 +116,9 @@ const Nav = () => {
                   key={provider.name}
                   className="black_btn"
                   onClick={() => signIn(provider.id)}
-                ></button>
+                >
+                  Sign In
+                </button>
               ))}
           </>
         )}
