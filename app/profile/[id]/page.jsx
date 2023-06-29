@@ -9,11 +9,13 @@ const UserProfile = () => {
 
   const searchParams = useSearchParams();
   const userName = searchParams.get("name");
+  const userId = searchParams.get("id");
   const router = useRouter();
 
+  console.log(userId);
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await fetch(`/api/${userName}/posts`);
+      const response = await fetch(`/api/users/${userId}/posts`);
       const data = await response.json();
       setPosts(data);
     };

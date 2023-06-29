@@ -4,6 +4,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+
 const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
   const { data: session } = useSession();
   const pathName = usePathname();
@@ -14,8 +15,13 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
     setTimeout(() => setCopied(""), 3000);
   };
   const router = useRouter();
+
   const handleGoToProfile = (userId, username) => {
-    router.push(`/profile/${userId}?name=${username}`);
+    if (session?.user.id === userId) {
+      router.push(`/profile`);
+    } else {
+      router.push(`/profile/${userId}?name=${username}&id=${userId}`);
+    }
   };
   return (
     <div className="prompt_card">
